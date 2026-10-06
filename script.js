@@ -35,9 +35,12 @@ emailjs.init({
 
 const noMessages = [
     "Are you sure? 🥺",
-    "Really? Think about it once more.",
-    "I promise I'm genuinely sorry. ❤️",
-    "Please give me one little chance."
+    "Really? Think about it once more. ❤️",
+    "I promise I'm genuinely sorry.",
+    "Please give me one little chance. 🥺",
+    "Okay... but I'm still hoping for a YES.",
+    "I think YES is getting harder to ignore now 😌",
+    "You know what... I made YES pretty convincing now ❤️"
 ];
 
 
@@ -108,23 +111,12 @@ function startTyping() {
 
 
 /* =========================================
-   NO BUTTON
+   NO BUTTON — PLAYFUL ONLY
 ========================================= */
 
 function handleNoClick() {
 
     if (responseSent) {
-        return;
-    }
-
-    /*
-       First four NO clicks are playful.
-       The fifth click is treated as the
-       final NO and sends the email.
-    */
-
-    if (noClicks >= 4) {
-        confirmNo();
         return;
     }
 
@@ -146,7 +138,7 @@ function handleNoClick() {
     }
 
 
-    /* Change message */
+    /* Change the message */
 
     const messageIndex =
         Math.min(
@@ -158,64 +150,85 @@ function handleNoClick() {
         noMessages[messageIndex];
 
 
-    /* Make YES bigger */
+    /*
+       YES grows every time NO is clicked.
+       It starts normally and becomes the
+       obvious choice after repeated NO clicks.
+    */
 
     const scale =
         Math.min(
-            1 + noClicks * 0.12,
-            1.55
+            1 + noClicks * 0.22,
+            2.8
         );
 
     yes.style.transform =
         `scale(${scale})`;
 
 
-    /* Move NO safely */
+    /*
+       Move NO around while keeping it
+       completely inside the button area.
+    */
 
-    if (noClicks >= 2) {
+    const area =
+        document.querySelector(
+            ".button-area"
+        );
 
-        const area =
-            document.querySelector(
-                ".button-area"
+    if (area) {
+
+        const areaWidth =
+            area.clientWidth;
+
+        const buttonWidth =
+            no.offsetWidth;
+
+        const maxX =
+            Math.max(
+                0,
+                (areaWidth - buttonWidth) / 2 - 8
             );
 
-        if (area) {
+        const x =
+            (Math.random() * 2 - 1) * maxX;
 
-            const areaWidth =
-                area.clientWidth;
+        const y =
+            (Math.random() * 50) - 25;
 
-            const buttonWidth =
-                no.offsetWidth;
-
-            const maxX =
-                Math.max(
-                    0,
-                    (areaWidth - buttonWidth) / 2 - 8
-                );
-
-            const x =
-                (Math.random() * 2 - 1) * maxX;
-
-            const y =
-                (Math.random() * 40) - 20;
-
-            no.style.transform =
-                `translate(${x}px, ${y}px)`;
-        }
+        no.style.transform =
+            `translate(${x}px, ${y}px)`;
     }
 
 
-    /* On fourth NO, show final wording */
+    /*
+       After several NO clicks, YES becomes
+       visually dominant and NO fades.
+    */
 
     if (noClicks >= 4) {
 
-        no.textContent =
-            "NO, I really mean it 😔";
+        no.style.opacity =
+            Math.max(
+                0.25,
+                0.9 - (noClicks - 4) * 0.18
+            );
 
-        no.style.opacity = "0.82";
+        no.textContent =
+            "NO 😤";
+
+    }
+
+
+    if (noClicks >= 7) {
 
         response.textContent =
-            "Okay... if you really mean it, tap NO once more.";
+            "Okay... I think you know which one I'm hoping for. ❤️";
+
+        no.style.opacity = "0.18";
+
+        yes.style.transform =
+            "scale(2.8)";
     }
 
 
@@ -237,33 +250,12 @@ function sayYes() {
 
     sendResponseEmail(
         "YES ❤️",
-        "She clicked YES and forgave you! ❤️"
+        "She clicked YES and forgave me! ❤️"
     );
 
     nextScreen(5);
 
     createHeartBurst();
-}
-
-
-/* =========================================
-   FINAL NO
-========================================= */
-
-function confirmNo() {
-
-    if (responseSent) {
-        return;
-    }
-
-    responseSent = true;
-
-    sendResponseEmail(
-        "NO 😔",
-        "She chose NO. She was honest about how she feels."
-    );
-
-    nextScreen(6);
 }
 
 
@@ -309,11 +301,6 @@ function sendResponseEmail(answer, message) {
                 "EmailJS error:",
                 error
             );
-
-            /*
-               The website still works even if
-               email delivery fails.
-            */
         }
     );
 }

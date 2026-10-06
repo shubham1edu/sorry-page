@@ -429,3 +429,38 @@ button {
         scroll-behavior: auto !important;
     }
 }
+
+
+/* =========================================
+   YES GROWTH SAFETY
+========================================= */
+
+.button-area {
+    min-height: 180px;
+    padding: 20px 8px;
+}
+
+.yes-btn {
+    position: relative;
+    z-index: 3;
+    transform-origin: center;
+}
+
+.no-btn {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 380px) {
+
+    .button-area {
+        min-height: 185px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .yes-btn,
+    .no-btn {
+        font-size: 15px;
+    }
+}
