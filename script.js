@@ -82,9 +82,9 @@ function startTyping() {
     }
 
     const text =
-        "I know he messed up things before... " +
-        "but today he wanted to say something. " +
-        "Something he really means.";
+        "I know I messed things up before... " +
+        "but today I wanted to say something. " +
+        "Something I really mean.";
 
     element.textContent = "";
 
