@@ -1,168 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>I'm Sorry ❤️</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    <meta
+        name="description"
+        content="A little something made by Shubham ❤️"
+    >
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ffd6e7, #ffe9f1);
-            overflow: hidden;
-        }
+    <meta name="theme-color" content="#fff7fa">
 
-        .container {
-            width: 90%;
-            max-width: 420px;
-            text-align: center;
-            background: white;
-            padding: 40px 25px;
-            border-radius: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-        }
+    <title>A Little Something ❤️</title>
 
-        .emoji {
-            font-size: 70px;
-        }
-
-        h1 {
-            color: #ff4f81;
-            font-size: 32px;
-            margin: 15px 0;
-        }
-
-        p {
-            font-size: 19px;
-            color: #555;
-        }
-
-        .buttons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        button {
-            border: none;
-            padding: 14px 25px;
-            border-radius: 30px;
-            font-size: 17px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        #yes {
-            background: #ff4f81;
-            color: white;
-        }
-
-        #no {
-            background: #eeeeee;
-            color: #444;
-        }
-
-        #message {
-            margin-top: 25px;
-            font-size: 17px;
-            color: #ff4f81;
-            min-height: 25px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="container">
+    <div id="hearts" aria-hidden="true"></div>
 
-        <div class="emoji">🥺</div>
+    <div class="page">
 
-        <h1>I'm Sorry ❤️</h1>
+        <main class="card">
 
-        <p>
-            I know I messed up...
-            <br>
-            Will you forgive me?
-        </p>
+            <!-- SCREEN 1 -->
+            <section
+                class="screen active"
+                id="screen1"
+                aria-labelledby="intro-title"
+            >
+                <div class="big-heart" aria-hidden="true">❤️</div>
 
-        <div class="buttons">
-            <button id="yes">YES ❤️</button>
-            <button id="no">NO 😤</button>
-        </div>
+                <p class="small-text">
+                    A little something from
+                </p>
 
-        <div id="message"></div>
+                <h1 id="intro-title">
+                    Shubham
+                </h1>
 
+                <p class="subtitle">
+                    Made with time, effort<br>
+                    and a little courage.
+                </p>
+
+                <div class="made-box">
+                    ✨ Shubham made this all by himself ✨
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    onclick="nextScreen(2)"
+                >
+                    I want to see →
+                </button>
+            </section>
+
+
+            <!-- SCREEN 2 -->
+            <section
+                class="screen"
+                id="screen2"
+                aria-labelledby="something-title"
+            >
+                <div class="icon" aria-hidden="true">💌</div>
+
+                <h2 id="something-title">
+                    We want to say<br>
+                    something to you...
+                </h2>
+
+                <p
+                    class="typing"
+                    id="typingText"
+                    aria-live="polite"
+                ></p>
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    onclick="nextScreen(3)"
+                >
+                    Continue ❤️
+                </button>
+            </section>
+
+
+            <!-- SCREEN 3 -->
+            <section
+                class="screen"
+                id="screen3"
+                aria-labelledby="hear-title"
+            >
+                <div class="icon" aria-hidden="true">🥺</div>
+
+                <h2 id="hear-title">
+                    Please hear me out...
+                </h2>
+
+                <div class="message">
+                    <p>
+                        I know things haven't always
+                        gone perfectly.
+                    </p>
+
+                    <p>
+                        I know I have messed things up
+                        before, and I'm not going to
+                        pretend I didn't.
+                    </p>
+
+                    <p>
+                        But today, Shubham wanted to
+                        say something...
+                    </p>
+
+                    <p class="highlight">
+                        I'm genuinely sorry. ❤️
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    onclick="nextScreen(4)"
+                >
+                    One last thing →
+                </button>
+            </section>
+
+
+            <!-- SCREEN 4 -->
+            <section
+                class="screen"
+                id="screen4"
+                aria-labelledby="question-title"
+            >
+                <div class="icon" aria-hidden="true">🥹</div>
+
+                <h2>So...</h2>
+
+                <h1
+                    class="question"
+                    id="question-title"
+                >
+                    Will you forgive me?
+                </h1>
+
+                <p
+                    id="responseMessage"
+                    aria-live="polite"
+                >
+                    Please think carefully... ❤️
+                </p>
+
+                <div class="button-area">
+
+                    <button
+                        type="button"
+                        id="yesBtn"
+                        class="yes-btn"
+                        onclick="sayYes()"
+                    >
+                        YES ❤️
+                    </button>
+
+                    <button
+                        type="button"
+                        id="noBtn"
+                        class="no-btn"
+                        onclick="handleNoClick()"
+                    >
+                        NO 😤
+                    </button>
+
+                </div>
+            </section>
+
+
+            <!-- SCREEN 5 — YES -->
+            <section
+                class="screen"
+                id="screen5"
+                aria-labelledby="thank-title"
+            >
+                <div
+                    class="celebration"
+                    aria-hidden="true"
+                >
+                    🥹❤️
+                </div>
+
+                <h1 id="thank-title">
+                    Thank you.
+                </h1>
+
+                <p class="final-message">
+                    I really mean it.
+                </p>
+
+                <p class="message">
+                    Maybe things aren't perfect,
+                    but I'm genuinely glad
+                    you gave me another chance.
+                </p>
+
+                <div
+                    class="final-heart"
+                    aria-hidden="true"
+                >
+                    ❤️
+                </div>
+
+                <p class="signature">
+                    — Shubham
+                </p>
+            </section>
+
+
+            <!-- SCREEN 6 — FINAL NO -->
+            <section
+                class="screen"
+                id="screen6"
+                aria-labelledby="no-title"
+            >
+                <div
+                    class="icon"
+                    aria-hidden="true"
+                >
+                    🥺
+                </div>
+
+                <h1 id="no-title">
+                    I understand.
+                </h1>
+
+                <p class="final-message">
+                    Thank you for being honest.
+                </p>
+
+                <p class="message">
+                    I didn't make this to pressure you.
+                    I just wanted you to know that
+                    I am genuinely sorry.
+                </p>
+
+                <div
+                    class="final-heart"
+                    aria-hidden="true"
+                >
+                    🤍
+                </div>
+
+                <p class="signature">
+                    — Shubham
+                </p>
+            </section>
+
+        </main>
     </div>
 
 
-    <script>
-
-        let yesButton = document.getElementById("yes");
-        let noButton = document.getElementById("no");
-        let message = document.getElementById("message");
-
-        let noClicks = 0;
-
-        noButton.addEventListener("click", function() {
-
-            noClicks++;
-
-            yesButton.style.transform =
-                `scale(${1 + noClicks * 0.15})`;
-
-            let messages = [
-                "Are you sure? 🥺",
-                "Really? 😭",
-                "Please think again 🥹",
-                "I'm really sorry 👉👈",
-                "One more chance? ❤️",
-                "Okay... you're making YES very tempting 😂",
-                "The YES button is getting bigger 😌",
-                "You know you want to click YES ❤️"
-            ];
-
-            message.innerText =
-                messages[Math.min(noClicks - 1, messages.length - 1)];
-
-            if (noClicks >= 6) {
-                noButton.style.transform = "scale(0.7)";
-            }
-
-        });
-
-
-        yesButton.addEventListener("click", function() {
-
-            document.querySelector(".container").innerHTML = `
-                <div class="emoji">🥰</div>
-
-                <h1>YAYYY! ❤️</h1>
-
-                <p>
-                    I knew you would forgive me 😌
-                    <br><br>
-                    Thank you ❤️
-                </p>
-
-                <div style="font-size:40px;">
-                    ❤️ 🥰 ❤️
-                </div>
-            `;
-
-        });
-
+    <!-- EmailJS -->
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@5/dist/email.min.js">
     </script>
 
+    <script src="script.js"></script>
+
 </body>
+
 </html>
