@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>I'm Sorry ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffd6e7, #ffe9f1);
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            background: white;
+            padding: 40px 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .emoji {
+            font-size: 70px;
+        }
+
+        h1 {
+            color: #ff4f81;
+            font-size: 32px;
+            margin: 15px 0;
+        }
+
+        p {
+            font-size: 19px;
+            color: #555;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 25px;
+            border-radius: 30px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yes {
+            background: #ff4f81;
+            color: white;
+        }
+
+        #no {
+            background: #eeeeee;
+            color: #444;
+        }
+
+        #message {
+            margin-top: 25px;
+            font-size: 17px;
+            color: #ff4f81;
+            min-height: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="emoji">🥺</div>
+
+        <h1>I'm Sorry ❤️</h1>
+
+        <p>
+            I know I messed up...
+            <br>
+            Will you forgive me?
+        </p>
+
+        <div class="buttons">
+            <button id="yes">YES ❤️</button>
+            <button id="no">NO 😤</button>
+        </div>
+
+        <div id="message"></div>
+
+    </div>
+
+
+    <script>
+
+        let yesButton = document.getElementById("yes");
+        let noButton = document.getElementById("no");
+        let message = document.getElementById("message");
+
+        let noClicks = 0;
+
+        noButton.addEventListener("click", function() {
+
+            noClicks++;
+
+            yesButton.style.transform =
+                `scale(${1 + noClicks * 0.15})`;
+
+            let messages = [
+                "Are you sure? 🥺",
+                "Really? 😭",
+                "Please think again 🥹",
+                "I'm really sorry 👉👈",
+                "One more chance? ❤️",
+                "Okay... you're making YES very tempting 😂",
+                "The YES button is getting bigger 😌",
+                "You know you want to click YES ❤️"
+            ];
+
+            message.innerText =
+                messages[Math.min(noClicks - 1, messages.length - 1)];
+
+            if (noClicks >= 6) {
+                noButton.style.transform = "scale(0.7)";
+            }
+
+        });
+
+
+        yesButton.addEventListener("click", function() {
+
+            document.querySelector(".container").innerHTML = `
+                <div class="emoji">🥰</div>
+
+                <h1>YAYYY! ❤️</h1>
+
+                <p>
+                    I knew you would forgive me 😌
+                    <br><br>
+                    Thank you ❤️
+                </p>
+
+                <div style="font-size:40px;">
+                    ❤️ 🥰 ❤️
+                </div>
+            `;
+
+        });
+
+    </script>
+
+</body>
+</html>
